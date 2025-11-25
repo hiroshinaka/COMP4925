@@ -124,4 +124,9 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
     }
+
+    public bool canAttack()
+        {
+        return true;
+    }
 }
