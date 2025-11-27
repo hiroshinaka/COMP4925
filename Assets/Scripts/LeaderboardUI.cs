@@ -31,7 +31,6 @@ public class LeaderboardUI : MonoBehaviour
         if (nextButton != null)
             nextButton.onClick.AddListener(OnNextClicked);
 
-        // Start hidden
         if (panelRoot != null)
             panelRoot.SetActive(false);
     }

@@ -30,15 +30,22 @@ public class GateTrigger : MonoBehaviour
             }
             else if (CompareTag("EndGate"))
             {
+                Debug.Log("EndGate triggered");
+
+                if (RunTimer.Instance == null)
+                    Debug.LogError("RunTimer.Instance is NULL");
+                if (LeaderboardAPI.Instance == null)
+                    Debug.LogError("LeaderboardAPI.Instance is NULL");
+                if (LeaderboardUI.Instance == null)
+                    Debug.LogError("LeaderboardUI.Instance is NULL");
+
                 RunTimer.Instance.StopTimer();
 
                 float time = RunTimer.Instance.currentTime;
                 int levelId = GetLevelId();
 
-                // Submit score to backend
                 LeaderboardAPI.Instance.SubmitScore(levelId, time);
 
-                // Show leaderboard UI and only change scene after player continues
                 LeaderboardUI.Instance.ShowLeaderboard(levelId, time, () =>
                 {
                     if (!string.IsNullOrEmpty(nextSceneName))
@@ -47,7 +54,8 @@ public class GateTrigger : MonoBehaviour
             }
 
 
+
         }
-        
+
     }
 }
