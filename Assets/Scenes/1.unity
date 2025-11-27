@@ -2872,6 +2872,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3279963084670396123, guid: 0927781f3de4a99439d8fb0a99744545, type: 3}
+      propertyPath: baseUrl
+      value: http://localhost:4000
+      objectReference: {fileID: 0}
     - target: {fileID: 5313727803027263444, guid: 0927781f3de4a99439d8fb0a99744545, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.01874
@@ -3131,7 +3135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4710921114989492585, guid: 6994be8c178bba240b947822841bf175, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502735399670582114, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: m_Name
+      value: RowsContainer
       objectReference: {fileID: 0}
     - target: {fileID: 7246020433915275145, guid: 6994be8c178bba240b947822841bf175, type: 3}
       propertyPath: m_text
