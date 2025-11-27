@@ -173,3 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c219937aa598b224c950ed11cff8b2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GateTrigger
+  levelIdOverride: -1
+  nextSceneName: 
+  confettiFX: {fileID: 6846746565212331104, guid: c8fe6a2ca07218c42b72f69b8aeb0256, type: 3}
