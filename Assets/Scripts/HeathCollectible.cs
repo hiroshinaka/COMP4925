@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class HealthCollectible: MonoBehaviour
 {
     [SerializeField] private float healthValue;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private AudioClip pickupSound;
     void Start()
     {
         
@@ -19,6 +20,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            SoundManager.instance.PlaySound(pickupSound);
             collision.GetComponent<Health>().AddHealth(healthValue);
             gameObject.SetActive(false);
         }

@@ -15,6 +15,12 @@ public class DeathBarrier : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        // Check if the thing that hit the barrier has a Health component
+        Health health = collision.GetComponent<Health>();
+        if (health != null)
+        {
+            health.Kill();          // triggers die anim + respawn via Health script
+        }
+
     }
 }

@@ -1,40 +1,75 @@
 using UnityEngine;
+using System.Collections;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
+
     private Animator anim;
     private bool dead;
-    
+    private PlayerMovement playerMovement;
+    private Rigidbody2D rb;
+
+    public Transform spawnPoint;
+
+    [Header("SFX")]
+    [SerializeField] private AudioClip hurtSound;
+    [SerializeField] private AudioClip deathSound;
+
     private void Awake()
     {
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
+        playerMovement = GetComponent<PlayerMovement>();
+        rb = GetComponent<Rigidbody2D>();
     }
     public void TakeDamage(float _damage)
     {
-        
+        if (dead) return;
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
         if (currentHealth > 0)
         {
             anim.SetTrigger("hurt");
+            SoundManager.instance.PlaySound(hurtSound);
         }
         else
         {
-            if (!dead)
-            {
-                anim.SetTrigger("die");
-                GetComponent<PlayerMovement>().enabled = false;
-                dead = true;
-            }
+            // Death
+            dead = true;
+            anim.SetTrigger("die");
+
+            if (playerMovement != null)
+                playerMovement.enabled = false;
+
 
         }
     }
-    private void Die()
+    public void OnDeathAnimationComplete()
     {
-        Debug.Log("Character has died.");
-        
+        Die();
+        SoundManager.instance.PlaySound(deathSound);
+    }
+    public void Die()
+    {
+        // Teleport to spawn
+        if (spawnPoint != null)
+            transform.position = spawnPoint.position;
+
+        // Reset velocity
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+        }
+
+        // Reset health and state
+        currentHealth = startingHealth;
+        dead = false;
+
+        if (playerMovement != null)
+            playerMovement.enabled = true;
+        anim.Play("Idle");  
+
     }
 
     private void Update()
@@ -49,5 +84,10 @@ public class Health : MonoBehaviour
     public void AddHealth(float _value)
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
+    }
+    public void Kill()
+    {
+        // Take all remaining health as damage
+        TakeDamage(currentHealth);
     }
 }

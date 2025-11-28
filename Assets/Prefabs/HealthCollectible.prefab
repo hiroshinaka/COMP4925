@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2568205093963763047}
   - component: {fileID: 2091036328951390362}
-  - component: {fileID: 6698463384078770745}
   - component: {fileID: 1122902339610913186}
+  - component: {fileID: 5427313311979487009}
   m_Layer: 0
   m_Name: HealthCollectible
   m_TagString: Untagged
@@ -92,19 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6698463384078770745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8060400187543161462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315c1f0d311c5d94dbbd744dfb21a348, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  healthValue: 1
 --- !u!61 &1122902339610913186
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,3 +138,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.2, y: 1.2}
   m_EdgeRadius: 0
+--- !u!114 &5427313311979487009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8060400187543161462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315c1f0d311c5d94dbbd744dfb21a348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  healthValue: 1
+  pickupSound: {fileID: 8300000, guid: 3e9e2cd9814e9734db49eba2d111f424, type: 3}

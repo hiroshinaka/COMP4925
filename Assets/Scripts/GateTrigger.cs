@@ -5,8 +5,10 @@ public class GateTrigger : MonoBehaviour
 {
     [SerializeField] private int levelIdOverride = -1;
     [SerializeField] private string nextSceneName; // set in Inspector
+    [SerializeField] private ParticleSystem confettiFX;
 
-    private bool isTimerRunning = false;
+    private bool startTriggered = false;
+    private bool endTriggered = false;
 
 
     private int GetLevelId()
@@ -21,41 +23,71 @@ public class GateTrigger : MonoBehaviour
     {
         if (!collision.CompareTag("Player")) return;
 
-        if (!isTimerRunning)
+        // START GATE
+        if (CompareTag("StartGate"))
         {
-            if (CompareTag("StartGate"))
+            if (startTriggered) return;
+            startTriggered = true;
+
+            if (RunTimer.Instance != null)
             {
                 RunTimer.Instance.StartTimer();
-                isTimerRunning = true;
+                Debug.Log("Timer Started");
             }
-            else if (CompareTag("EndGate"))
+            else
             {
-                Debug.Log("EndGate triggered");
+                Debug.LogError("RunTimer.Instance is NULL");
+            }
 
+            return;
+        }
+
+        // END GATE
+        if (CompareTag("EndGate"))
+        {
+            if (endTriggered) return;
+            endTriggered = true;
+
+            Debug.Log("EndGate triggered");
+
+            // Play confetti if assigned
+            if (confettiFX != null)
+            {
+                confettiFX.transform.position = transform.position; // optional
+                confettiFX.Play();
+            }
+            else
+            {
+                Debug.LogWarning("ConfettiFX is not assigned on GateTrigger", this);
+            }
+
+            // Make sure singletons exist before using them
+            if (RunTimer.Instance == null ||
+                LeaderboardAPI.Instance == null ||
+                LeaderboardUI.Instance == null)
+            {
                 if (RunTimer.Instance == null)
                     Debug.LogError("RunTimer.Instance is NULL");
                 if (LeaderboardAPI.Instance == null)
                     Debug.LogError("LeaderboardAPI.Instance is NULL");
                 if (LeaderboardUI.Instance == null)
                     Debug.LogError("LeaderboardUI.Instance is NULL");
-
-                RunTimer.Instance.StopTimer();
-
-                float time = RunTimer.Instance.currentTime;
-                int levelId = GetLevelId();
-
-                LeaderboardAPI.Instance.SubmitScore(levelId, time);
-
-                LeaderboardUI.Instance.ShowLeaderboard(levelId, time, () =>
-                {
-                    if (!string.IsNullOrEmpty(nextSceneName))
-                        SceneManager.LoadScene(nextSceneName);
-                });
+                return; // avoid NullReferenceException
             }
 
+            RunTimer.Instance.StopTimer();
 
+            float time = RunTimer.Instance.currentTime;
+            int levelId = GetLevelId();
 
+            // This is where your SSL error is coming from if the backend isn’t reachable
+            LeaderboardAPI.Instance.SubmitScore(levelId, time);
+
+            LeaderboardUI.Instance.ShowLeaderboard(levelId, time, () =>
+            {
+                if (!string.IsNullOrEmpty(nextSceneName))
+                    SceneManager.LoadScene(nextSceneName);
+            });
         }
-
     }
 }

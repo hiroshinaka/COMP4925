@@ -15,6 +15,10 @@ public class LeaderboardUI : MonoBehaviour
     [SerializeField] private Button nextButton;
 
     private Action _onDone;
+    public void DebugClick()
+    {
+        Debug.Log("Next button clicked!");
+    }
 
     private void Awake()
     {
