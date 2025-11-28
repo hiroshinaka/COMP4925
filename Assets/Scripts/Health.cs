@@ -13,7 +13,9 @@ public class Health : MonoBehaviour
 
     public Transform spawnPoint;
 
-
+    [Header("SFX")]
+    [SerializeField] private AudioClip hurtSound;
+    [SerializeField] private AudioClip deathSound;
 
     private void Awake()
     {
@@ -29,6 +31,7 @@ public class Health : MonoBehaviour
         if (currentHealth > 0)
         {
             anim.SetTrigger("hurt");
+            SoundManager.instance.PlaySound(hurtSound);
         }
         else
         {
@@ -45,6 +48,7 @@ public class Health : MonoBehaviour
     public void OnDeathAnimationComplete()
     {
         Die();
+        SoundManager.instance.PlaySound(deathSound);
     }
     public void Die()
     {

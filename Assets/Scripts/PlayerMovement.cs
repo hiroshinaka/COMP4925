@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpCooldown;
     private float horizontalInput;
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip jumpsound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -70,7 +72,14 @@ public class PlayerMovement : MonoBehaviour
 
             // Use GetKeyDown so jump triggers on press; allow Jump() to decide grounded vs wall-jump
             if (Input.GetKeyDown(KeyCode.Space))
+            {
                 Jump();
+                if(Input.GetKeyDown(KeyCode.Space) && isGrounded())
+                {
+                    SoundManager.instance.PlaySound(jumpsound);
+                }
+            }
+                
 
         }
         else
