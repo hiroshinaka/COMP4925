@@ -19,7 +19,7 @@ public class LoginManager : MonoBehaviour
 
     [Header("Backend")]
     [Tooltip("Base URL of your API, no trailing slash")]
-    public string apiBaseUrl = "https://unity-backend-wdzk.onrender.com";  
+    public string apiBaseUrl = "https://unity-backend-wdzk.onrender.com";
 
     private const string SaveKeyPrefix = "SaveData_";
 
@@ -60,7 +60,7 @@ public class LoginManager : MonoBehaviour
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
             if (errorText != null)
-            errorText.text = "Please enter username and password.";
+                errorText.text = "Please enter username and password.";
             Debug.LogWarning("Username or password is empty.");
             return;
         }
@@ -77,7 +77,7 @@ public class LoginManager : MonoBehaviour
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
             if (errorText != null)
-            errorText.text = "Please enter username and password.";
+                errorText.text = "Please enter username and password.";
             Debug.LogWarning("Username or password is empty.");
             return;
         }
@@ -99,7 +99,7 @@ public class LoginManager : MonoBehaviour
         PlayerPrefs.DeleteKey(saveKey);
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene("GameScene"); // rename to your actual game scene name
+        SceneManager.LoadScene("1"); // rename to your actual game scene name
     }
 
     // Hook this to Resume Game Button OnClick
@@ -112,7 +112,7 @@ public class LoginManager : MonoBehaviour
         }
 
         // Later you can load actual save data here
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("1");
     }
 
     // ========================
@@ -140,7 +140,7 @@ public class LoginManager : MonoBehaviour
                 Debug.LogError($"Signup network error: {www.error}");
                 Debug.LogError("Response: " + www.downloadHandler.text);
                 if (errorText != null)
-                errorText.text = "Network error. Please try again.";
+                    errorText.text = "Network error. Please try again.";
             }
             else
             {
@@ -164,7 +164,7 @@ public class LoginManager : MonoBehaviour
                 {
                     Debug.LogWarning($"Signup failed with status {www.responseCode}: {www.downloadHandler.text}");
                     if (errorText != null)
-                    errorText.text = "Signup failed. Check username/password.";
+                        errorText.text = "Signup failed. Check username/password.";
                 }
             }
         }
