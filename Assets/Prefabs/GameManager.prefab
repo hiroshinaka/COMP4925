@@ -59,4 +59,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec70082b45d733341ac64c2aa94c5cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LeaderboardAPI
-  baseUrl: https://localhost:4000
+  baseUrl: https://unity-backend-wdzk.onrender.com

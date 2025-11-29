@@ -2874,7 +2874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3279963084670396123, guid: 0927781f3de4a99439d8fb0a99744545, type: 3}
       propertyPath: baseUrl
-      value: http://localhost:4000
+      value: https://unity-backend-wdzk.onrender.com
       objectReference: {fileID: 0}
     - target: {fileID: 5313727803027263444, guid: 0927781f3de4a99439d8fb0a99744545, type: 3}
       propertyPath: m_LocalPosition.x

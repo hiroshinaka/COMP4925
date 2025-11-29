@@ -8,7 +8,7 @@ public class LeaderboardAPI : MonoBehaviour
 {
     public static LeaderboardAPI Instance;
 
-    [SerializeField] private string baseUrl = "http://localhost:4000";
+    [SerializeField] private string baseUrl = "https://unity-backend-wdzk.onrender.com";
 
     private void Awake()
     {
