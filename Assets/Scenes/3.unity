@@ -3152,13 +3152,17 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 898553207}
+    - target: {fileID: 522968224990440945, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2340988433703542199, guid: 6994be8c178bba240b947822841bf175, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 825.07007
+      value: -134.93
       objectReference: {fileID: 0}
     - target: {fileID: 2340988433703542199, guid: 6994be8c178bba240b947822841bf175, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 456.67004
+      value: -54.07
       objectReference: {fileID: 0}
     - target: {fileID: 3171979666638826429, guid: 6994be8c178bba240b947822841bf175, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3252,6 +3256,10 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 693327640}
+    - target: {fileID: 9131268414020417585, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: rowPrefab
+      value: 
+      objectReference: {fileID: 1892650661483465581, guid: 22229274e0f90d94eb8536f0d6e8bd0d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3707,8 +3715,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 898553208}
-  - {fileID: 1932781092}
   - {fileID: 549307300}
+  - {fileID: 1932781092}
   - {fileID: 1161320285}
   - {fileID: 193807211}
   - {fileID: 2008326742}

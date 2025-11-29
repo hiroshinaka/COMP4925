@@ -1641,6 +1641,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1743558423}
     m_Modifications:
+    - target: {fileID: 1338990735159175974, guid: cd2c004c621a7974fbb55c1adb600e6e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1338990735159175974, guid: cd2c004c621a7974fbb55c1adb600e6e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1338990735159175974, guid: cd2c004c621a7974fbb55c1adb600e6e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2112659901
+      objectReference: {fileID: 0}
     - target: {fileID: 1547627265473581338, guid: cd2c004c621a7974fbb55c1adb600e6e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.29
@@ -2933,6 +2945,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 390326156}
+    - target: {fileID: 522968224990440945, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 522968224990440945, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159252176468420726, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3483691685332880831, guid: 6994be8c178bba240b947822841bf175, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3013,6 +3037,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7678446155062010223, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8043841676639059810, guid: 6994be8c178bba240b947822841bf175, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -3021,6 +3049,22 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 58909656}
+    - target: {fileID: 9131268414020417585, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: nameText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131268414020417585, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: rankText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131268414020417585, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131268414020417585, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: rowPrefab
+      value: 
+      objectReference: {fileID: 1892650661483465581, guid: 22229274e0f90d94eb8536f0d6e8bd0d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3160,6 +3204,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1743558423}
     m_Modifications:
+    - target: {fileID: 1338990735159175974, guid: cd2c004c621a7974fbb55c1adb600e6e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4921881953375056424, guid: cd2c004c621a7974fbb55c1adb600e6e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

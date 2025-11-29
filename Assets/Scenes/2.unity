@@ -975,6 +975,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 522968224990440945, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2159252176468420726, guid: 6994be8c178bba240b947822841bf175, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1071,6 +1075,10 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 955154466}
+    - target: {fileID: 9131268414020417585, guid: 6994be8c178bba240b947822841bf175, type: 3}
+      propertyPath: rowPrefab
+      value: 
+      objectReference: {fileID: 1892650661483465581, guid: 22229274e0f90d94eb8536f0d6e8bd0d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

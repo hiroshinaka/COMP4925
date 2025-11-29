@@ -7,9 +7,12 @@ using TMPro;
 
 public class LoginManager : MonoBehaviour
 {
+    public static LoginManager Instance { get; private set; }
+
     [Header("Input Fields")]
     public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
+
     [Header("Error UI")]
     public TMP_Text errorText;
 
@@ -23,7 +26,11 @@ public class LoginManager : MonoBehaviour
 
     private const string SaveKeyPrefix = "SaveData_";
 
-    private string currentUser = "";
+    // Current logged-in user
+    public string CurrentUsername { get; private set; }
+
+    // Optional: cookie if we ever get sessions working
+    public static string SessionCookie { get; private set; }
 
     [System.Serializable]
     private class AuthPayload
@@ -40,6 +47,20 @@ public class LoginManager : MonoBehaviour
         public string error;
     }
 
+    private void Awake()
+    {
+        // Simple singleton so other scripts can do LoginManager.Instance.CurrentUsername
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         // Disable game buttons until logged in
@@ -51,7 +72,6 @@ public class LoginManager : MonoBehaviour
     // UI HOOKS
     // ========================
 
-    // Hook this to Login Button OnClick
     public void OnLoginClicked()
     {
         string username = usernameInput.text.Trim();
@@ -68,7 +88,6 @@ public class LoginManager : MonoBehaviour
         StartCoroutine(LoginCoroutine(username, password));
     }
 
-    // Hook this to Signup Button OnClick
     public void OnSignupClicked()
     {
         string username = usernameInput.text.Trim();
@@ -85,38 +104,34 @@ public class LoginManager : MonoBehaviour
         StartCoroutine(SignupCoroutine(username, password));
     }
 
-    // Hook this to Start New Game Button OnClick
     public void OnStartNewGameClicked()
     {
-        if (string.IsNullOrEmpty(currentUser))
+        if (string.IsNullOrEmpty(CurrentUsername))
         {
             Debug.LogWarning("Tried to start game without login.");
             return;
         }
 
-        // Clear any old save
-        string saveKey = SaveKeyPrefix + currentUser;
+        string saveKey = SaveKeyPrefix + CurrentUsername;
         PlayerPrefs.DeleteKey(saveKey);
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene("1"); // rename to your actual game scene name
+        SceneManager.LoadScene("1"); // your game scene name
     }
 
-    // Hook this to Resume Game Button OnClick
     public void OnResumeGameClicked()
     {
-        if (string.IsNullOrEmpty(currentUser))
+        if (string.IsNullOrEmpty(CurrentUsername))
         {
             Debug.LogWarning("Tried to resume game without login.");
             return;
         }
 
-        // Later you can load actual save data here
         SceneManager.LoadScene("1");
     }
 
     // ========================
-    // COROUTINES: TALK TO BACKEND
+    // COROUTINES: BACKEND
     // ========================
 
     private IEnumerator SignupCoroutine(string username, string password)
@@ -147,7 +162,6 @@ public class LoginManager : MonoBehaviour
                 var responseText = www.downloadHandler.text;
                 Debug.Log("Signup response: " + responseText);
 
-                // Treat 2xx as success
                 if (www.responseCode >= 200 && www.responseCode < 300)
                 {
                     AuthResponse res = null;
@@ -205,6 +219,8 @@ public class LoginManager : MonoBehaviour
                     }
                     catch { }
 
+                    CaptureSessionCookie(www); // optional now
+
                     Debug.Log("Login successful for user: " + username);
                     OnAuthSuccess(username);
                 }
@@ -222,12 +238,48 @@ public class LoginManager : MonoBehaviour
 
     private void OnAuthSuccess(string username)
     {
-        currentUser = username;
+        CurrentUsername = username;
 
         string saveKey = SaveKeyPrefix + username;
         bool hasSave = PlayerPrefs.HasKey(saveKey);
 
         startButton.SetActive(true);
         resumeButton.SetActive(hasSave);
+    }
+
+    private void CaptureSessionCookie(UnityWebRequest www)
+    {
+        var headers = www.GetResponseHeaders();
+        if (headers == null)
+        {
+            Debug.LogWarning("No response headers; cannot capture session cookie.");
+            return;
+        }
+
+        foreach (var kv in headers)
+        {
+            Debug.Log($"Header: {kv.Key} = {kv.Value}");
+        }
+
+        foreach (var kv in headers)
+        {
+            if (kv.Key != null && kv.Key.ToLower() == "set-cookie")
+            {
+                var raw = kv.Value;
+                if (string.IsNullOrEmpty(raw)) continue;
+
+                var parts = raw.Split(';');
+                if (parts.Length > 0)
+                {
+                    SessionCookie = parts[0].Trim();
+                    Debug.Log("Stored session cookie: " + SessionCookie);
+                }
+            }
+        }
+
+        if (string.IsNullOrEmpty(SessionCookie))
+        {
+            Debug.LogWarning("Login succeeded but no Set-Cookie header was found.");
+        }
     }
 }

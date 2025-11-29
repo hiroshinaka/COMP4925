@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -58,7 +58,7 @@ public class LeaderboardUI : MonoBehaviour
             panelRoot.SetActive(true);
 
         if (titleText != null)
-            titleText.text = $"Level {levelId} � Leaderboard\nYour time: {finalTime:F3}s";
+            titleText.text = $"Level {levelId} – Leaderboard\nYour time: {finalTime:F3}s";
 
         // Clear old rows
         foreach (Transform child in rowsContainer)
@@ -70,26 +70,33 @@ public class LeaderboardUI : MonoBehaviour
 
     private void OnLeaderboardLoaded(LeaderboardResponse resp)
     {
-        if (resp == null || resp.scores == null)
-        {
-            Debug.LogWarning("No leaderboard data received");
-            return;
-        }
+        if (resp == null || resp.scores == null) return;
 
-        for (int i = 0; i < resp.scores.Length; i++)
+        int maxToShow = 5;
+        int count = Mathf.Min(resp.scores.Length, maxToShow);
+
+        for (int i = 0; i < count; i++)
         {
             ScoreEntry entry = resp.scores[i];
 
-            GameObject rowGO = Instantiate(rowPrefab, rowsContainer);
-            TextMeshProUGUI[] texts = rowGO.GetComponentsInChildren<TextMeshProUGUI>();
+            GameObject row = Instantiate(rowPrefab, rowsContainer);
+            row.transform.localScale = Vector3.one;
 
-            // Expecting 3 texts: Rank, Name, Time
-            if (texts.Length >= 3)
-            {
-                texts[0].text = (i + 1).ToString() + ".";
-                texts[1].text = entry.playerName;
-                texts[2].text = $"{entry.timeSec:F3}s";
-            }
+
+            var rankTf = row.transform.Find("RankText");
+            var nameTf = row.transform.Find("NameText");
+            var timeTf = row.transform.Find("TimeText");
+
+
+            var rankText = rankTf != null ? rankTf.GetComponent<TextMeshProUGUI>() : null;
+            var nameText = nameTf != null ? nameTf.GetComponent<TextMeshProUGUI>() : null;
+            var timeText = timeTf != null ? timeTf.GetComponent<TextMeshProUGUI>() : null;
+
+            if (rankText != null) rankText.text = (i + 1) + ".";
+            if (nameText != null) nameText.text = entry.playerName;
+            if (timeText != null) timeText.text = entry.timeSec.ToString("F3") + "s";
         }
     }
+
+
 }
